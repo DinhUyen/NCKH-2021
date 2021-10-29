@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<!--
+ * -------------------------------------------------------------------------
+ * WordOps Dashboard
+ * -------------------------------------------------------------------------
+ * Website: https://wordops.net
+ * GitHub:  https://github.com/WordOps/wordops-dashboard
+ * Copyright (c) 2019 - WordOps
+ * This dashboard template is licensed under M.I.T
+ * -------------------------------------------------------------------------
+ * Version 1.2 - 2019-09-22
+ * -------------------------------------------------------------------------
+ */-->
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="NCKH">
+    <meta http-equiv="refresh" content="1000">
+    <title>Web Sever</title>
+    <!-- Favicon -->
+    <link href="assets/img/brand/favicon.png" rel="icon" type="image/png">
+    <!-- Fonts -->
+    <link type="text/css" href="assets/css/gfonts.min.css" rel="stylesheet">
+    <!-- Argon CSS -->
+    <link type="text/css" href="assets/css/argon.min.css" rel="stylesheet">
+    <link type="text/css" href="assets/css/argon.css" rel="stylesheet">
+    <!-- Custon CSS -->
+    <link type="text/css" href="assets/css/custom.min.css" rel="stylesheet">
+    <script>
+        var netdataNoBootstrap = true;
+        var netdataNoFontAwesome = true;
+    </script>
+    <!-- <script type="text/javascript" src="/netdata/dashboard.js"></script> -->
+    <script defer src="https://use.fontawesome.com/releases/v5.8.1/js/all.js"
+        integrity="sha384-g5uSoOSBd7KkhAMlnQILrecXvzst9TdC09/VM+pjDTCM+1il8RHz5fKANTFFb+gQ" crossorigin="anonymous">
+        </script>
+    <script type="text/javascript" scr="https://www.gstatic.com/charts/loader.js"></script>
+    <script src="http://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <!-- Sidenav -->
+    <nav class="navbar navbar-vertical fixed-left navbar-expand-md navbar-light bg-white" id="sidenav-main">
+        <div class="container-fluid">
+            <!-- Toggler -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#sidenav-collapse-main"
+                aria-cont rols="sidenav-main" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <!-- Collapse -->
+            <div class="collapse navbar-collapse" id="sidenav-collapse-main">
+                <!-- Collapse header -->
+                <div class="navbar-collapse-header d-md-none">
+                    <div class="row">
+                        <div class="col-6 collapse-brand">
+                            <a href="/">
+                                <img src="assets/img/brand/logo.png">
+                            </a>
+                        </div>
+                        <div class="col-6 collapse-close">
+                            <button type="button" class="navbar-toggler" data-toggle="collapse"
+                                data-target="#sidenav-collapse-main" aria-controls="sidenav-main" aria-expanded="false"
+                                aria-label="Toggle sidenav">
+                                <span></span>
+                                <span></span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Navigation -->
+                <ul class="navbar-nav" id="list-tab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link list-group-item-action active" aria-selected="true" id='Dashboard'>
+                            <i class="fas fa-home fa-lg"></i> Dashboard
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" target="_blank" rel="noopener" id='Management'>
+                            <i class="fas fa-folder-open fa-lg"></i> Management
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" target="_blank" rel="noopener" id='Settings'>
+                            <i class="fas fa-cog"></i> Settings
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" target="_blank" rel="noopener" id='Update'>
+                            <i class="fas fa-tasks"></i> Update
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" target="_blank" rel="noopener" id='Tools'>
+                            <i class="fas fa-tools"></i> Tools
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- Main content -->
+    <div class="main-content">
+        <!-- Top navbar -->
+        <nav class="navbar navbar-top navbar-expand-md navbar-dark" id="navbar-main">
+            <div class="container-fluid">
+                <!-- Brand -->
+                <a class="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block" href="/">Quản lý mạng nội bộ</a>
+            </div>
+        </nav>
+        <!-- Header -->
+
+        <div class="header bg-gradient-info pb-8 pt-4 pt-md-6" id="Header">
+            <div class="container-fluid">
+                <div class="header-body">
+                    <!-- Card stats -->
+                    <div class="row" id="HeaderUpdate">
+                        <ul class="nav nav-pills">
+                            <li class="nav-item"><a>
+                                    <a class="nav-link" id="btnCreateRule" href="">CREATE RULE</a>
+                            </li>
+
+                            <li class="nav-item ">
+                                <a class="nav-link active" id="btnUpdateSignature" href="">UPDATE SIGNATURE</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" id="btnDownload" data-toggle="dropdown"
+                                    href="">DOWNLOAD</a>
+                                <div class="dropdown-menu" id="downloadSignature">
+                                    <a class="dropdown-item" id="downloadSignatureExample" href="">Download signature
+                                        example</a>
+                                    <a class="dropdown-item" id="downloadSignatureCurrent" href="">Download signature
+                                        current</a>
+                                    <a class="dropdown-item" id="downloadSignatureBackup" href="">Download signature
+                                        backup</a>
+                                </div>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="btnDocument" href="">DOCUMENTS</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="row" id="HeaderDashboard">
+                        <div class="col-xl col-lg-6">
+                            <div class="card card-stats mb-3 mb-xl-0">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div id="antoan" class="col">
+                                            <span>
+                                                <img src="/assets/img/PCs/clean.png" alt="" class="icons">
+                                            </span>
+                                            <h3>Số máy an toàn</h3>
+                                            <div>
+                                                <h1 style="text-align: center;">0/0</h1>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl col-lg-6">
+                            <div class="card card-stats mb-3 mb-xl-0">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div id="canhbao" class="col">
+                                            <span>
+                                                <img src="/assets/img/PCs/warning.png" alt="" class="icons">
+
+                                            </span>
+                                            <h3>Số máy cảnh báo</h3>
+                                            <div>
+                                                <h1 style="text-align: center;">0/0</h1>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl col-lg-6">
+                            <div class="card card-stats mb-3 mb-xl-0">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div id="baodong" class="col">
+                                            <span>
+                                                <img src="/assets/img/PCs/alert.png" alt="" class="icons">
+                                            </span>
+                                            <h3>Số máy nguy hiểm</h3>
+                                            <div>
+                                                <h1 style="text-align: center;">0/0</h1>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container">
+                <div class="nav-wrapper">
+                    <ul class="nav nav-pills nav-fill flex-column flex-md-row" id="tabs-icons-text" role="tablist">
+                        <li class="nav-item" hidden="true">
+                            <a class="nav-link active display-4" id="tabs-icons-text-1-tab" data-toggle="tab"
+                                href="#tabs-icons-text-1" role="tab" aria-controls="tabs-icons-text-1"
+                                aria-selected="true">
+                                <i class="fas fa-server fa-lg"></i> Monitoring</a>
+                    </ul>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="tab-content" id="nav-tabContent">
+
+            <!-- First TAB -->
+            <div class="tab-pane fade show active" id="tabs-icons-text-1" role="tabpanel"
+                aria-labelledby="tabs-icons-text-1-ta">
+                <div class="container-fluid mt--8" id='DataDashboard'>
+                    <div class="row">
+                        <div class="col-xl-8 mb-5 mb-xl-0">
+                            <div class="card">
+
+                                <div class="card-header shadow border-0">
+                                    <div class="row align-items-center">
+                                        <div class="col">
+                                            <h3 class="mb-0 "><i class="fas fa-chart-bar fa-lg"></i> Chart</h3>
+                                        </div>
+                                        <div class="col text-right">
+                                            <a href="/netdata/" class="btn btn-sm btn-primary" target="_blank">See
+                                                all</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="chart">
+                                    <canvas id="mychart"></canvas>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="col-xl-4">
+                            <div class="card shadow">
+                                <div class="card-header shadow border-0">
+                                    <div class="row align-items-center">
+                                        <div class="col">
+                                            <h3 class="mb-0"><i class="far fa-check-square fa-lg"></i> Status</h3>
+                                        </div>
+                                        <div class="col text-right">
+                                            <a href="/netdata/" class="btn btn-sm btn-primary" target="_blank">See
+                                                all</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="table-responsive">
+                                    <!-- Projects table -->
+                                    <table class="table align-items-center table-flush">
+                                        <thead class="thead-light">
+                                            <tr>
+                                                <th scope="col"></th>
+                                                <th scope="col"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th scope="row">
+                                                    Tổng số máy
+                                                </th>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <div id="totalClient">0</div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">
+                                                    Số máy đang online
+                                                </th>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <!-- <div>
+                                                            <embed
+                                                                src="/netdata/api/v1/badge.svg?chart=system.cpu&alarm=10min_cpu_usage&refresh=auto"
+                                                                type="image/svg+xml" height="20" />
+                                                        </div> -->
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">
+                                                    Máy báo động hôm nay
+                                                </th>
+
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <div id="totalAlert">0</div>
+                                                        <!-- <div>
+                                                            <embed
+                                                                src="/netdata/api/v1/badge.svg?chart=system.load&alarm=load_average_15&refresh=auto"
+                                                                type="image/svg+xml" height="20" />
+                                                        </div> -->
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">
+                                                    Máy cảnh báo hôm nay
+                                                </th>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <div id="totalWarning">0</div>
+                                                        <!-- <div>
+                                                            <embed
+                                                                src="/netdata/api/v1/badge.svg?chart=system.ram&alarm=ram_in_use&refresh=auto"
+                                                                type="image/svg+xml" height="20" />
+                                                        </div> -->
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">
+                                                    Máy an toàn hôm nay
+                                                </th>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <div id="totalSafe">0</div>
+                                                        <!-- <div>
+                                                            <embed
+                                                                src="/netdata/api/v1/badge.svg?chart=mem.available&alarm=ram_available&refresh=auto"
+                                                                type="image/svg+xml" height="20" />
+                                                        </div> -->
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- End bieu do -->
+                <!-- Bat dau management -->
+                <div class="container-fluid mt--8" id='DataManagement'>
+                    <div class="row" style="height: 500px;">
+                        <div class="col-xl-12 mb-5 mb-xl-0">
+                            <div class="card">
+                                <div class="card-header shadow border-0">
+                                    <div class="row align-items-center">
+                                        <div class="col">
+                                            <h3 class="mb-0 "><i class="fas fa-folder-open fa-lg"></i> Management</h3>
+                                        </div>
+                                        <div class="col text-right">
+                                            <a href="/netdata/" class="btn btn-sm btn-primary" target="_blank">See
+                                                all</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="container" style="overflow-y: scroll;">
+                                    <div class="row" style="height: 450px;">
+                                        <div id="may1" class="col-lg-3 col-md-6 col-xl-3" onclick="showDetect(this)">
+                                            <img src="assets/img/PCs/clean.jpg" alt="" class="computer-name">
+                                            <button class="computer-name-btn js-btn">demo</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Ket thuc management -->
+
+                <!-- Bat dau setting -->
+                <div class="container-fluid mt--8" id='DataSettings'>
+                    <div class="row" style="height: 500px;">
+                        <div class="col-xl-12 mb-5 mb-xl-0">
+                            <div class="card">
+                                <div class="card-header shadow border-0">
+                                    <div class="row align-items-center">
+                                        <div class="col">
+                                            <h3 class="mb-0 "><i class="fas fa-folder-open fa-lg"></i> Management</h3>
+                                        </div>
+                                        <div class="col text-right">
+                                            <a href="/netdata/" class="btn btn-sm btn-primary" target="_blank">See
+                                                all</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="container" style="overflow-y: scroll;">
+                                    <div class="row" style="height: 450px;">
+                                        <div id="may1" class="col-lg-3 col-md-6 col-xl-3" onclick="showDetect(this)">
+                                            <img src="assets/img/PCs/clean.jpg" alt="" class="computer-name">
+                                            <button class="computer-name-btn js-btn">demo</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <!-- Ket thuc setting -->
+
+                </div>
+                <!-- Bat dau update -->
+                <div class="container-fluid mt--8" id='DataUpdate'>
+                    <div class="row">
+                        <div class="col-xl-12 mb-5 mb-xl-0">
+                            <div class="card">
+                                <div class="form-upload" id="DataUpdateSignature">
+                                    <div class="header-container-wrapper">
+                                        <div class="header-container">
+                                            <div class="custom-header-bg">
+                                                <div class="page-center">
+                                                    <div class="logo">Update</div>
+                                                    <div class="logo float-right versionCurrent">Phiên bản hiện tại :
+                                                        1.0</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="body-container-wrapper uploadSignature">
+                                        <div class="body-container">
+                                            <div class="page-center ">
+                                                <br>
+                                                <h1>Update Your <strong>Signature</strong></h1>
+                                                <br>
+                                                <form id="upload" method="post" enctype="multipart/form-data">
+                                                    <div id="drop">
+                                                        <a class="upload" id="call-to-action">
+                                                            <input type="file" name="upl" multiple multiple>
+                                                        </a>
+                                                    </div>
+                                                    <br>
+                                                    <div class="form-group">
+                                                        <div><label for="version">Phiên bản:
+                                                                <input type="text" class="form-control"
+                                                                    placeholder="1.0" id="version">
+
+                                                            </label>
+                                                        </div>
+                                                        <div><label for="clean">Xóa Signature cũ:
+                                                                <!-- <input type="text" class="form-control" placeholder="Enter name rule" id="clean"> -->
+                                                                <div class="col-75 clean">
+                                                                    <select id="Choose">
+                                                                        <option value="True">True</option>
+                                                                        <option value="False">False</option>
+
+                                                                    </select>
+
+                                                                </div>
+                                                            </label>
+                                                        </div>
+                                                        <button type="submit"
+                                                            class="btn btn-primary uploadSignature">Tải lên</button>
+                                                </form>
+                                            </div>
+                                            <div class="body-container result" style="text-align:center;">
+                                                Upload Signature với định dạng : Signature.zip
+                                            </div>
+                                            <br>
+                                            <button type="submit" class="btn btn-primary  restoreSignature">Khôi phục
+                                                Signature trước</button>
+                                            <br>
+                                        </div>
+                                        <br>
+                                    </div>
+
+                                    <div class="footer-container-wrapper" hidden>
+                                        <div class="footer-container">
+                                            <div class="custom-footer-bg">
+                                                <div class="page-center">
+                                                    <div class="navigation">
+                                                        <ul>
+                                                            <li><a href="#" class="button click-upload">Download</a>
+                                                            </li>
+                                                            <li><a href="#" class="button open-progress">Add to
+                                                                    signature</a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--Create rule-->
+                            <div class="form-upload" id="DataCreateRule" hidden>
+                                <div class="header-container-wrapper">
+                                    <div class="header-container">
+                                        <div class="custom-header-bg">
+                                            <div class="page-center">
+                                                <div class="logo">Thêm rule vào Signature</div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="body-container  createrule" style="text-align:center;">
+                                    <div class="body-container" id="taiRule">
+                                        <div class="page-center uploadExecute">
+                                            <br>
+                                            <h1>Update Your <strong>Signature</strong></h1>
+                                            <br>
+                                            <form id="upload" method="post" enctype="multipart/form-data">
+                                                <div id="drop">
+                                                    <a class="upload" id="call-to-action">
+                                                        <input type="file" name="upl" multiple multiple>
+                                                    </a>
+                                                </div>
+                                                <br>
+                                                <div class="form-group">
+                                                    <div><label for="nameRule">Tên rule:
+                                                            <input type="text" class="form-control"
+                                                                placeholder="Nhập tên" id="nameRule">
+
+                                                        </label>
+                                                    </div>
+                                                    <div><label for="description">Mô tả:
+                                                            <input type="text" class="form-control"
+                                                                placeholder="No description " id="description">
+
+                                                        </label>
+                                                    </div>
+                                                    <div><label for="author">Tác giả:
+                                                            <input type="text" class="form-control"
+                                                                placeholder="Nhập tên tác giả " id="author">
+
+                                                        </label>
+                                                    </div>
+                                                    <div><label for="score">Điểm:
+                                                            <input type="text" class="form-control"
+                                                                placeholder="Nhập mức độ nguy hiểm " id="score">
+
+                                                        </label>
+                                                    </div>
+                                                    <div><label for="typeFile">Loại file:
+                                                            <input type="text" class="form-control"
+                                                                placeholder="exe,bin,... " id="typeFile">
+
+                                                        </label>
+                                                    </div>
+
+                                                    <button type="submit" class="btn btn-primary uploadFileExcute">Tải
+                                                        lên</button>
+                                            </form>
+                                        </div>
+                                        <div class="body-container result" style="text-align:center;">
+                                            Create rule yara
+                                        </div>
+
+                                    </div>
+                                    <div class="body-container rule" style=" text-align:left;padding:100px;"
+                                        id="addrule" hidden>
+                                        <h1> <strong>Yara Rule</strong></h1>
+                                        <br>
+                                        <h2 id="ruleCreated">
+                                        </h2>
+                                        <button type="submit" class="btn btn-primary AddSignature">Thêm vào
+                                            signature</button>
+                                        <button type="submit" class="btn btn-primary downloadRule">Tải rule vừa
+                                            tạo</button>
+                                    </div>
+                                    <form id="addRuleCreated" method="post">
+                                        <br>
+                                        <div class="form-group">
+                                            <label for="version">Version:</label>
+                                            <input type="text" class="form-control" placeholder="Enter version"
+                                                id="version">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="namerule">Name rule:</label>
+                                            <input type="text" class="form-control" placeholder="Enter name rule"
+                                                id="namerule">
+                                        </div>
+                                        <div><label for="clean">Xóa Signature cũ:
+                                                <!-- <input type="text" class="form-control" placeholder="Enter name rule" id="clean"> -->
+                                                <div class="col-75 clean">
+                                                    <select id="Choose">
+                                                        <option value="True">True</option>
+                                                        <option value="False">False</option>
+
+                                                    </select>
+
+                                                </div>
+                                            </label>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary add">Add</button>
+                                    </form>
+                                    <br>
+
+                                </div>
+                            </div>
+
+                            <!-- <div class="footer-container-wrapper">
+                                        <div class="footer-container">
+                                            <div class="custom-footer-bg">
+                                                <div class="page-center">
+                                                    <div class="navigation">
+                                                        <ul>
+
+
+                                                            <li><a href="#" class="button click-upload">Add</a></li>
+                                                           
+
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div> -->
+                        </div>
+                        <!--Download-->
+                        <div class="form-upload" id="DataDownload" hidden>
+                            <div class="header-container-wrapper">
+                                <div class="header-container">
+                                    <div class="custom-header-bg">
+                                        <div class="page-center">
+                                            <div class="logo">Version</div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- <div class="body-container-wrapper" id="chooseDownload" hidden>
+                                <div class="body-container">
+                                    <div class="page-center">
+                                        <div class="row">
+                                            <div><button type="button" id="downloadExampleSignature"
+                                                    class="btn">Download Example
+                                                    Signature</button>
+                                            </div>
+
+                                            <button type="button" class="btn btn-primary"
+                                                id="downloadCurrentSignature">Download Current
+                                                Signature</button>
+                                            <button type="button" class="btn btn-secondary"
+                                                id="downloadBackupSignature">Download Backup
+                                                Signature</button>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div> -->
+
+
+
+                        </div>
+                        <!-- document -->
+                        <div class="form-upload" id="DataDocument" hidden>
+                            <div class="header-container-wrapper">
+                                <div class="header-container">
+                                    <div class="custom-header-bg">
+                                        <div class="page-center">
+                                            <div class="logo">Version</div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+
+
+                        </div>
+                        <!--Upload-->
+                        <!-- <div class="form-upload" >
+                                    <div class="header-container-wrapper">
+                                        <div class="header-container">
+                                            <div class="custom-header-bg">
+                                                <div class="page-center">
+                                                    <div class="logo">The last version</div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="body-container-wrapper">
+                                            <div class="body-container" style="padding: 30px;">
+                                                <form action="/action_page.php">
+                                                    <div class="form-group">
+                                                        <label for="version">Current Version:</label>
+                                                        <input type="text" class="form-control"
+                                                            placeholder="Enter version" id="email">
+                                                    </div>
+                                                    <div class="form-group">
+
+                                                    </div>
+
+                                                    <button type="submit" class="btn btn-primary">Upload</button>
+                                                    <button type="submit" class="btn btn-primary">Restore</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div> -->
+                    </div>
+                </div>
+                <!-- Ket thuc update -->
+            </div>
+        </div>
+    </div>
+    <footer class="footer">
+        <div class="container-fluid">
+            <div class="row align-items-center justify-content-xl-between">
+                <div class="col-xl-6">
+                    <div class="copyright text-center text-xl-left text-muted">
+                        &copy; 2021 <a class="font-weight-bold ml-1" target="_blank">Creative NCKH</a>
+                    </div>
+                </div>
+                <div class="col-xl-6">
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Hiển thị thông tin -->
+    <div class="table-detect modal js-modal">
+        <div class="modal-container">
+            <div class="modal-close js-modal-close">
+                <i class="fas fa-window-close"></i>
+            </div>
+            <div class="modal-header">
+                INFORMATION
+            </div>
+            <div class="modal-body">
+
+            </div>
+            <div class="modall-footer">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const tableDetect = document.querySelector('.table-detect');
+        const tableDetectClose = document.querySelector('.js-modal-close')
+        function showTable() {
+            tableDetect.classList.add('open');
+        }
+        function hideTable() {
+            tableDetect.classList.remove('open');
+        }
+        tableDetectClose.addEventListener('click', hideTable);
+    </script>
+    <script src="assets/js/custom.js">
+    </script>
+    <script src="assets/js/jquery-3.3.1.slim.min.js">
+    </script>
+    <script src="assets/js/popper.min.js">
+    </script>
+    <script src="assets/js/bootstrap.min.js">
+    </script>
+    <!-- Argon JS -->
+    <script src="assets/js/argon.min.js"></script>
+    </script>
+</body>
+
+</html>
